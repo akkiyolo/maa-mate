@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary: #645495;
+  --color-primary-container: #c8b6ff;
+  --color-on-primary-container: #544484;
+  --color-on-primary: #ffffff;
+  --color-secondary: #7e5262;
+  --color-secondary-container: #fec5d8;
+  --color-on-secondary-container: #7a4f5f;
+  --color-tertiary: #40627b;
+  --color-tertiary-container: #a2c5e2;
+  --color-on-tertiary-container: #30526b;
+  --color-background: #fdf8fe;
+  --color-on-background: #1c1b1f;
+  --color-surface: #ffffff;
+  --color-surface-container: #f1ecf3;
+  --color-surface-container-low: #f7f2f8;
+  --color-surface-container-high: #ece6ed;
+  --color-on-surface: #1c1b1f;
+  --color-on-surface-variant: #48454f;
+  --color-outline: #797580;
+  --color-outline-variant: #cac4d1;
+  --color-error: #ba1a1a;
+  
+  --radius-xl: 3rem;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  -webkit-font-smoothing: antialiased;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(100, 84, 149, 0.1);
+}
+
+.voice-orb-glow {
+  background: radial-gradient(circle, rgba(200, 182, 255, 0.8) 0%, rgba(126, 82, 98, 0) 70%);
+}

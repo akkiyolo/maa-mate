@@ -1,0 +1,9 @@
+{
+  "name": "MaaMate AI",
+  "description": "An AI parenting companion providing baby monitoring, AI-narrated stories, planning, and hands-free voice assistance.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": []
+}
