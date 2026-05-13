@@ -10,7 +10,6 @@ import { useAppStore } from './store';
 import { useVoiceAssistant } from './hooks/useVoiceAssistant';
 import { useWebSocket } from './hooks/useWebSocket';
 import { api } from './services/api';
-
 export default function App() {
   const {
     activeTab,
@@ -143,7 +142,7 @@ export default function App() {
             {isAuthenticated && user ? (
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-sm">
-                  {user.name.charAt(0).toUpperCase()}
+                  {user?.name?.charAt(0).toUpperCase() || 'U'}
                 </div>
                 <button onClick={() => { clearUser(); api.logout(); }} className="text-outline hover:text-primary transition-colors" title="Logout">
                   <LogOut className="w-5 h-5" />

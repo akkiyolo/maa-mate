@@ -15,6 +15,8 @@ export function useWebSocket() {
     setBabyStatus,
     setCryLevel,
     setMotionLevel,
+    setMonitoringActive,
+    setIsPlaying,
     setCurrentTrack,
     lullabies,
     setActiveTab,
@@ -116,13 +118,15 @@ export function useWebSocket() {
       case 'log_created':
         addLog(data);
         break;
-
+      case 'play_lullaby': {
+        const tracks = lullabies.filter((l) => l.category === (data.soundType || 'lullaby'));
         if (tracks.length > 0) {
           setCurrentTrack(tracks[0]);
           setIsPlaying(true);
           setActiveTab('stories');
         }
         break;
+      }
       case 'navigate':
         if (data.tab) setActiveTab(data.tab);
         break;

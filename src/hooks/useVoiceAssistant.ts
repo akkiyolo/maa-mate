@@ -199,12 +199,13 @@ export function useVoiceAssistant() {
       await speak(response, 'calm_mother');
 
       // After speaking, auto-restart listening if mic is still active
-      const { micActive } = useAppStore.getState();
-      if (micActive) {
+      // This enables continuous, hands-free conversation
+      const { micActive, voiceState } = useAppStore.getState();
+      if (micActive && voiceState === 'idle') {
         setTimeout(() => {
           const stillActive = useAppStore.getState().micActive;
           if (stillActive) startListeningInternal();
-        }, 500);
+        }, 300);
       }
     } catch (error) {
       console.error('Voice error:', error);

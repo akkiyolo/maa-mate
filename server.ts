@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 import { createServer } from 'http';
 import { WebSocketServer, WebSocket } from 'ws';
 import cors from 'cors';
-import { User, Log, Reminder, Alert, Conversation } from './models.js';
+import { User, Log, Reminder, Alert, Conversation } from './models';
 
 dotenv.config();
 
@@ -444,13 +444,14 @@ const PORT = parseInt(process.env.PORT || '3001', 10);
 
 // For local running
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
-  connectDB().then(() => {
-    httpServer.listen(PORT, () => {
-      console.log(`\n✨ MaaMate Backend running on http://localhost:${PORT}`);
-      console.log(`   AI: Groq (llama-3.3-70b-versatile)`);
-      console.log(`   TTS: ElevenLabs`);
-      console.log(`   WebSocket: ws://localhost:${PORT}/ws\n`);
-    });
+  // Try connecting but start server regardless
+  connectDB().catch(() => console.log('Starting without DB persistence'));
+  
+  httpServer.listen(PORT, () => {
+    console.log(`\n✨ MaaMate Backend running on http://localhost:${PORT}`);
+    console.log(`   AI: Groq (llama-3.3-70b-versatile)`);
+    console.log(`   TTS: ElevenLabs`);
+    console.log(`   WebSocket: ws://localhost:${PORT}/ws\n`);
   });
 } else {
   // On Vercel, we still need to connect to DB for the serverless function
