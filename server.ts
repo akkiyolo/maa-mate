@@ -199,6 +199,7 @@ app.post('/api/voice/process', async (req: AuthRequest, res) => {
       ...conversationCache[uid],
     ];
 
+    console.log(`🧠 AI Request: "${text}"`);
     const completion = await groq.chat.completions.create({ messages, model: 'llama-3.3-70b-versatile', temperature: 0.7, max_tokens: 1024 });
     const aiText = completion.choices[0]?.message?.content || "I'm here for you. Can you say that again?";
 
@@ -213,9 +214,11 @@ app.post('/api/voice/process', async (req: AuthRequest, res) => {
       if (intent) executeIntent(intent, req.userId);
     }
 
+    console.log(`🤖 AI Response: "${cleanResponse}" (Intent: ${intent?.intent || 'none'})`);
     res.json({ response: cleanResponse, intent, babyStatus: monitoring.babyStatus, monitoring: monitoring.active });
   } catch (err: any) {
-    console.error('Voice error:', err.message);
+    console.error('❌ Voice processing error:', err.message);
+    if (err.response) console.error('   API Response:', err.response.data);
     res.json({ response: "I'm having a small hiccup, but I'm still here for you.", intent: null });
   }
 });
